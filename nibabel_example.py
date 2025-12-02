@@ -1,12 +1,12 @@
 import nibabel as nib
 import neurovolume as nv
 import numpy as np
-import tempfile
 from urllib.request import urlretrieve
 
 url = "https://s3.amazonaws.com/openneuro.org/ds003548/sub-01/anat/sub-01_T1w.nii.gz?versionId=5ZTXVLawdWoVNWe5XVuV6DfF2BnmxzQz"
-file = "./files/sub-01_T1w.nii.gz"
+file = "./data/sub-01_T1w.nii.gz"
 
+print("downloading test data...")
 f_res = urlretrieve(url, file)
 
 print("static testfile downloaded to ", file)
@@ -25,6 +25,8 @@ norm = np.transpose(norm, (1, 2, 0))
 norm = np.ascontiguousarray(norm)
 print("data normalized")
 
-output = "./files/from_nib.vdb"
+output = "./data/from_nib.vdb"
+print("creating vdb...")
 nv.ndarray_to_VDB(norm, output, img.affine)
 print("data saved as vdb")
+print("done")
