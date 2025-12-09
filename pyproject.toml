@@ -3,9 +3,10 @@ name = "neurovolume-examples"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.12.12"
 dependencies = [
-    "neurovolume>=0.1.0a9",
+    "antspyx>=0.6.1",
+    "neurovolume>=0.1.0a10",
     "nibabel>=5.3.2",
     "numpy>=1.26.4",
 ]
