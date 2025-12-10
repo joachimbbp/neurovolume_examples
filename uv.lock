@@ -1,6 +1,6 @@
 version = 1
 revision = 3
-requires-python = ">=3.12.12"
+requires-python = ">=3.12"
 
 [[package]]
 name = "antspyx"
@@ -376,16 +376,16 @@ wheels = [
 
 [[package]]
 name = "neurovolume"
-version = "0.1.0a10"
+version = "0.1.0a11"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
     { name = "pytest" },
     { name = "ziglang" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d8/41/70c0974d7868b83447b7649bc30cedc0edb9fdc3edd516d58bf5c9e01c31/neurovolume-0.1.0a10.tar.gz", hash = "sha256:064f85960d4bdbacf1cf7cb340e92fee1f4db2d506461244c94abfff89d52cfd", size = 486952, upload-time = "2025-12-03T23:22:16.659Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/92/43/c3161cff5d0d6bb8aa19fce1c3795cd66425cf80168d88881eb949fa5614/neurovolume-0.1.0a11.tar.gz", hash = "sha256:e0fdb10503dc26271a25001cb7db30dc4eebf175ed9d9ecaa74ed84f1bfc664b", size = 487455, upload-time = "2025-12-09T19:36:57.941Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b6/38/c323a46669f75d557be54d7769c2b5dbb04a498d67d8d7003803796cdb05/neurovolume-0.1.0a10-py3-none-any.whl", hash = "sha256:102c712ba451d7acbcb9972e9e8c923dbf932c661c8579c61030a94f7bfde04b", size = 486456, upload-time = "2025-12-03T23:22:15.402Z" },
+    { url = "https://files.pythonhosted.org/packages/4c/75/aeabdb79bfcc0349f2517438ffadde06112b222f3a60621c4526806eaccc/neurovolume-0.1.0a11-py3-none-any.whl", hash = "sha256:6340bc05963422242f5945f3b3fd47e61f4b9fd55da72224caebbef4a18c2a68", size = 486957, upload-time = "2025-12-09T19:36:56.549Z" },
 ]
 
 [[package]]
@@ -402,7 +402,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "antspyx", specifier = ">=0.6.1" },
-    { name = "neurovolume", specifier = ">=0.1.0a10" },
+    { name = "neurovolume", specifier = ">=0.1.0a11" },
     { name = "nibabel", specifier = ">=5.3.2" },
     { name = "numpy", specifier = ">=1.26.4" },
 ]

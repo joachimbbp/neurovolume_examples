@@ -1,7 +1,7 @@
 # Skull strip with ANTs
+# saves the skull and the brain separately
+# based on https://github.com/Angeluz-07/MRI-preprocessing-techniques/blob/main/notebooks/09_brain_extraction_with_template.ipynb
 
-
-# rewrite of https://github.com/Angeluz-07/MRI-preprocessing-techniques/blob/main/notebooks/09_brain_extraction_with_template.ipynb
 import os
 import util
 import ants
@@ -17,11 +17,11 @@ template_mask = ants.image_read(
 anat = ants.image_read("./data/sub-01_T1w.nii")  # might not work!
 np.unique(template_mask.numpy())  # ?
 
-print("registering template to anat")
+print("registering template to anat...")
 transformation = ants.registration(
     fixed=anat, moving=template, type_of_transform="SyN", verbose=True
 )
-print("registering matte to template")
+print("registering matte to template...")
 brain_mask = ants.apply_transforms(
     fixed=transformation["warpedmovout"],
     moving=template_mask,
@@ -30,28 +30,24 @@ brain_mask = ants.apply_transforms(
     verbose=True,
 )
 
-print("dialating brain mask...")
+print("dilating brain mask...")
 brain_mask_dilated = ants.morphology(
     brain_mask, radius=4, operation="dilate", mtype="binary"
 )
-print("masking anat...")
-masked = ants.mask_image(anat, brain_mask_dilated)
+print("masking skull...")
+brain_isolated_raw = ants.mask_image(anat, brain_mask_dilated)
+print("preparing brain...")
+brain_isolated = nv.prep_ndarray(brain_isolated_raw.numpy())
+print("saving brain vdb...")
+nv.ndarray_to_VDB(brain_isolated, "./data/brain.vdb")
 
-print("saving vdb...")
-print("normalizing array...")
-norm = util.normalize_array(masked.numpy()).astype(order="C", dtype=np.float64)
-
-norm = np.transpose(norm, (1, 2, 0))
-norm = np.ascontiguousarray(norm)
-
-
-print(f"sanity check: this should be an ndarray: {type(norm)} dtype: {norm.dtype}")
-print(f"Does ./data/ exist? {os.path.exists('./data/')}")
-print(f"Array shape: {norm.shape}")
-print(f"Array contains NaN? {np.isnan(norm).any()}")
-print(f"Array contains Inf? {np.isinf(norm).any()}")
-
-nv.ndarray_to_VDB(norm, "./data/masked.vdb")  # BUG:
-#  something broken here
+inverted_mask = 1 - brain_mask_dilated # LLM
+print("masking brain...")
+print(f"type of numpy")
+skull_isolated_raw = ants.mask_image(anat, inverted_mask)
+print("preparing skull...")
+skull_isolated = nv.prep_ndarray(skull_isolated_raw.numpy())
+print("saving anat vdb...")
+nv.ndarray_to_VDB(skull_isolated, "./data/skull.vdb")
 
 print("done")
