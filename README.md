@@ -1,5 +1,6 @@
-Example Python code for the [neurovolume](https://github.com/joachimbbp/neurovolume) package.
+![Skull Stripping with ANTS and BOLD image from Nibabel](/README_media/skull_strip.jpeg)
 
+Example Python code for the [neurovolume](https://github.com/joachimbbp/neurovolume) package.
 
 This software was tested using the following datasets.
 
